@@ -1,0 +1,25 @@
+
+version: 1.0.{build}
+environment:
+  my_secret:
+    secure: pGMWD7r+u0/itGG4ZpP5Q/LQ9iXKlachpdJmQ+BXjUY=
+pull_requests:
+  do_not_increment_build_number: true
+skip_non_tags: true
+build: off
+install:
+  - cmd: pip install qsctl
+  - cmd: nuget install secure-file -ExcludeVersion
+  - cmd: secure-file\tools\secure-file -decrypt key_app.yaml.enc -secret %my_secret%
+
+artifacts:
+  - path: app-agent-windows-386
+    name: app-agent-windows-386
+deploy:
+  - provider: Environment
+    name: agent
+    on:
+      appveyor_repo_tag: true
+after_deploy:
+- ps: dir $artifacts['app-agent-windows-386'].path
+- ps: qsctl cp -f $artifacts['app-agent-windows-386'].path qs://appcenter-docs/developer-guide/scripts/app-agent-windows-386.zip -c key_app.yaml -z pek3a
