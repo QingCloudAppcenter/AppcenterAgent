@@ -18,8 +18,9 @@ CMD=$(echo "$CMD_LINE" | cut -d ":" -f 2-)
 
 echo "$(date +"%Y-%m-%d %H:%M:%S") $CMD_ID [executing]: $CMD" >> "$CMD_LOG" 2>&1
 eval "$CMD" >> "$APP_LOG" 2>&1
-if [ $? -ne 0 ]; then
-    echo "$(date +"%Y-%m-%d %H:%M:%S") $CMD_ID [failed]: $CMD" >> "$CMD_LOG" 2>&1
+EXIT_CODE=$?
+if [ $EXIT_CODE -ne 0 ]; then
+    echo "$(date +"%Y-%m-%d %H:%M:%S") $CMD_ID [failed$EXIT_CODE]: $CMD" >> "$CMD_LOG" 2>&1
     exit 1
 fi
 
