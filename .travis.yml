@@ -16,10 +16,12 @@ deploy:
     secure: WtOiUKOKmk1pIV4jtjrvNHWZtN4Fa9pAZjiN1oYGGUjV0DUBdzSUg80fXQFxvX6sLLDeXmXXX51OH5lAAujcfW+Ax4AbhzNUaKmGlZ9CXBub8o5Mun8+yEhy4Vxm3faa27VfUa3EGG3hdr1k2UuGBOofP78u1Wli7w76Bo5gb3O64XyDoiwkvfw3Do7OQWJvJQ/ttymLy0QsBgPDrIlqpFuW6LYirJGlmKhC0p95VDn0R/KbDCw+xVhboWn4d+Zo15IPT5i9VbwCBO/mcCCn4Lnfnt3BrOGjxT9ZhhlqEJLlI+1Di1w12C1SqrOf92PaOhilSGcxHt6qZOPTOU6UjdVfT+o+wjCcM/zhbEeFFr5uYisq9vh2+wqKAFdvSzn5Yl4PJb22SgIU2dpDwVOYzsisOwlSjBy6XwKIRH/8yVuvbIlhInPdd6X4/4NkFeOPV+O5H/K0BfyjfOFl/Iy/fut+ZU31MD8qdOUxq4/1aniQX+Js6KJpvd0bQLRjJCN7RmXys94EEuCMzoawg4hvf73bGBcMw7y9VC5n86+/R7bzcIh6oy1CFSJQzwbQu+6l10Pw5Gqq1TPWj4Mk35thQw/fCNGoXkktzN3Bc5V3FHgSwc7/5FOe+nryKwg+SchdPeXtg856/w7YNP72qS9E3/XiMwAfs9ZqX1UpG+y0xiQ=
   file: 
   - "app-agent-linux-amd64.tar.gz"
+  - "app-agent-linux-arm64.tar.gz"
   - "app-agent-windows-386.zip"
   on:
     repo: QingCloudAppcenter/AppcenterAgent
     tags: true
 after_deploy:
 - qsctl cp -f app-agent-linux-amd64.tar.gz qs://appcenter-docs/developer-guide/scripts/app-agent-linux-amd64.tar.gz -c key.yaml -z pek3a
+- qsctl cp -f app-agent-linux-arm64.tar.gz qs://appcenter-docs/developer-guide/scripts/app-agent-linux-arm64.tar.gz -c key.yaml -z pek3a
 - qsctl cp -f app-agent-windows-386.zip qs://appcenter-docs/developer-guide/scripts/app-agent-windows-386.zip -c key.yaml -z pek3a
